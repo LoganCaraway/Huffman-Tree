@@ -115,7 +115,6 @@ public class HuffmanTree {
     }
     
     /*Given a filled map, this functions moves the items to a queue, builds the tree, then makes a bitmap of the characters*/
-    /*Note: resets map variable*/
     private void buildTree(Map map) {
         PriorityQueue<Node> queue = new PriorityQueue<>(map.size());
         Node temp;
@@ -124,7 +123,6 @@ public class HuffmanTree {
         for(Object c : map.keySet()) {
             queue.add(new Node((char)c, (int)map.get(c)/*, -1*/));
         }
-        map.clear();
         
         //combine Nodes from queue into tree
         while (queue.size() > 1) {
@@ -148,13 +146,7 @@ public class HuffmanTree {
     private void makeBitmap(Node currentNode, String s) {
         //when the key isn't null, this is a leaf
         if (currentNode.getKey() != '\0') {
-            
-            try {
-                map.put(currentNode.getKey(), currentNode.getFrequency());
-                map2.put(currentNode.getKey(), s);
-            } catch (NumberFormatException e) {
-                System.out.println(s+"Error mapping Node with key: "+currentNode.getKey());
-            }
+            map2.put(currentNode.getKey(), s);
             return;
         }
         //go left and add 0 to the code
